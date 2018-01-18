@@ -7,8 +7,8 @@ from logging import warning
 from sys import exit, argv
 from urlparse import urljoin
 
-from utils.utils import load_config
-from utils.storage import *
+from utils import load_config
+from storage import *
 
 def search_platforms(url):
 	res = get(url)

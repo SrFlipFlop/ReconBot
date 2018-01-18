@@ -1,5 +1,9 @@
 from sqlite3 import connect
 
+#Platforms: | id | name | url |
+#Assets: | id | name | url | platform | android | ios | reward | scope |
+#Scope: | asset | url | time |
+
 def save_platforms_db(platforms):
     pass
 
