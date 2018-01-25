@@ -10,20 +10,6 @@ from urlparse import urljoin
 from utils import load_config
 from storage import *
 
-def search_platforms(url):
-	res = get(url)
-	soup = BeautifulSoup(res.content)
-	table = soup.find('table', {'class':'table-body-style-highlighted'})
-	
-	platforms = {}
-	for row in table.findAll('tr'):
-		a = row.find('a')
-		name = row.find('a').text
-		url = row.find('a')['href']
-		platforms['name'] = url
-
-	return platforms
-
 def search_assets_p1(url):
 	page = 1
 	items = []
@@ -63,15 +49,11 @@ def have_pagination_p1(html):
 			return True
 	return False
 
-if __name__ == '__main__':
-	if len(argv) == 2:
-		if argv[1] == 'p': #platforms	
-			config = load_config()
-			platforms = search_platforms(config['platforms_url'])
+def search_assets_p2(url):
+	pass
 
-		if argv[1] == 'a': #assets			
-			#Crawl each platform dinamically from configuration
-			#locals()["f{0}".format(x)]()
-			pass
-	else:
-		warning('Incorrect arguments using Crawler {0}'.format(argv))
+if __name__ == '__main__':
+	conf = load_config()
+	for platform, url in conf['platforms']:
+		locals()["search_assets_{0}".format(platform)](url)
+		#Save to database
